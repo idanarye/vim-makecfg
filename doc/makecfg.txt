@@ -26,7 +26,7 @@ USAGE                                                           *makecfg-usage*
     " Will run "ant":
     :make
 <
-* ":MCF <cfgname>" to set 'makeprg' and 'errorformat' locally.
+* ":MCF! <cfgname>" to set 'makeprg' and 'errorformat' locally.
 * ":MCF <cfgname> <command>" to set 'makeprg' and 'errorformat', run the
   command, and then set them back.
   " Will run "ant": >

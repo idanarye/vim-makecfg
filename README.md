@@ -23,13 +23,13 @@ USAGE
    :" Will run "ant":
    :make
    ```
+ * `:MCF! <cfgname>` to set `makeprg` and `errorformat` locally.
  * `:MCF <cfgname> <command>` to set `makeprg` and `errorformat`, run the
    command, and then set them back.
    ```vim
    :" Will run "ant":
    :MCF ant make
    ```
- * `:MCF <cfgname>` to set `makeprg` and `errorformat` locally.
  * `makecfg#getOptions(<cfgname>)` to get the `makeprg` and `errorformat` in
    a Vim dictionary to use in your own plugin.
  * ([Omnipytent](https://github.com/idanarye/vim-omnipytent) extension) a

@@ -19,10 +19,21 @@ function! makecfg#getOptions(cfgName) abort
     endtry
 endfunction
 
-function! makecfg#useOptions(cfgName) abort
+function! s:set(makeprg, errorformat, scope) abort
+endfunction
+
+function! makecfg#useOptions(cfgName, scope) abort
     let l:options = makecfg#getOptions(a:cfgName)
-    let &makeprg = l:options.makeprg
-    let &errorformat = l:options.errorformat
+    if a:scope == ''
+        let &makeprg = l:options.makeprg
+        let &errorformat = l:options.errorformat
+    elseif a:scope == 'l'
+        let &l:makeprg = l:options.makeprg
+        let &l:errorformat = l:options.errorformat
+    elseif a:scope == 'g'
+        let &g:makeprg = l:options.makeprg
+        let &g:errorformat = l:options.errorformat
+    endif
 endfunction
 
 function! makecfg#withOptions(cfgName, command) abort
@@ -32,15 +43,19 @@ function! makecfg#withOptions(cfgName, command) abort
         throw 'MakeCFG has no configuration named ' . a:cfgName
     endtry
 
-    let l:oldMakeprg = &makeprg
-    let l:oldErrorformat = &errorformat
+    let l:lMakeprg = &l:makeprg
+    let l:lErrorformat = &l:errorformat
+    let l:gMakeprg = &g:makeprg
+    let l:gErrorformat = &g:errorformat
     try
         let &makeprg = l:options.makeprg
         let &errorformat = l:options.errorformat
         execute a:command
     finally
-        let &makeprg = l:oldMakeprg
-        let &errorformat = l:oldErrorformat
+        let &l:makeprg = l:lMakeprg
+        let &l:errorformat = l:lErrorformat
+        let &g:makeprg = l:gMakeprg
+        let &g:errorformat = l:gErrorformat
     endtry
 endfunction
 
@@ -49,11 +64,14 @@ function! s:parseCommand(command) abort
     return l:match[1:3]
 endfunction
 
-function! makecfg#vimCommand(command) abort
+function! makecfg#vimCommand(command, local) abort
     let [l:config, l:_, l:command] = s:parseCommand(a:command)
     if empty(l:command)
-        call makecfg#useOptions(l:config)
+        call makecfg#useOptions(l:config, a:local ? 'l' : 'g')
     else
+        if a:local
+            throw '`:MCF!` cannot be used when executing command - use `:MFC`'
+        endif
         call makecfg#withOptions(l:config, l:command)
     endif
 endfunction

@@ -19,13 +19,14 @@ https://github.com/idanarye/vim-makecfg
 
 USAGE                                                           *makecfg-usage*
 
-* ":MCF <cfgname>" to set 'makeprg' and 'errorformat' to those defined by
+* "*:MCF* <cfgname>" to set 'makeprg' and 'errorformat' to those defined by
   the selected tool: >
 
     :MCF ant
     " Will run "ant":
     :make
 <
+* ":MCF <cfgname>" to set 'makeprg' and 'errorformat' locally.
 * ":MCF <cfgname> <command>" to set 'makeprg' and 'errorformat', run the
   command, and then set them back.
   " Will run "ant": >

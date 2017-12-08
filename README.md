@@ -16,23 +16,24 @@ JSON and we'll try to approve the PR as soon as possible.
 USAGE
 =====
 
- * `:MCF <cfgname>` to set `&makeprg` and `&errorformat` to those defined by
+ * `:MCF <cfgname>` to set `makeprg` and `errorformat` to those defined by
    the selected tool:
    ```vim
    :MCF ant
    :" Will run "ant":
    :make
    ```
- * `:MCF <cfgname> <command>` to set `&makeprg` and `&errorformat`, run the
+ * `:MCF <cfgname> <command>` to set `makeprg` and `errorformat`, run the
    command, and then set them back.
    ```vim
    :" Will run "ant":
    :MCF ant make
    ```
- * `makecfg#getOptions(<cfgname>)` to get the `&makeprg` and `&errorformat` in
+ * `:MCF <cfgname>` to set `makeprg` and `errorformat` locally.
+ * `makecfg#getOptions(<cfgname>)` to get the `makeprg` and `errorformat` in
    a Vim dictionary to use in your own plugin.
  * ([Omnipytent](https://github.com/idanarye/vim-omnipytent) extension) a
-   context manager for setting `&makeprg` and `&errorformat` in Omnipytent tasks:
+   context manager for setting `makeprg` and `errorformat` in Omnipytent tasks:
    ```python
    from omnipytent.ext.makecfg import makecfg
 

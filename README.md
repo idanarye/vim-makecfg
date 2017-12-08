@@ -20,13 +20,13 @@ USAGE
    the selected tool:
    ```vim
    :MCF ant
-   " Will run "ant":
+   :" Will run "ant":
    :make
    ```
  * `:MCF <cfgname> <command>` to set `&makeprg` and `&errorformat`, run the
    command, and then set them back.
    ```vim
-   " Will run "ant":
+   :" Will run "ant":
    :MCF ant make
    ```
  * `makecfg#getOptions(<cfgname>)` to get the `&makeprg` and `&errorformat` in

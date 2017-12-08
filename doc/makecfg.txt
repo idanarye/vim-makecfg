@@ -1,0 +1,45 @@
+*makecfg.txt* Database of 'makeprg' and 'errorformat' settings
+
+
+Author:  Idan Arye <https://github.com/idanarye/>
+License: Same terms as Vim itself (see |license|)
+
+INTRODUCTION                                                          *makecfg*
+
+Vim'a |:make| command is simple and elegant, but requires the user to configure
+their 'makeprg' and 'errorformat' options to the tool they want to use.
+MakeCFG aims to be a database of these settings for various compilers,
+interpreters and build tools. It contains a JSON file with data about the
+different options, and basic API for using it.
+
+MakeCFG hopes to get many tiny pull requests that add the settings of more and
+more tools, so if the one you use is not in here yet - please add it to the
+JSON and we'll try to approve the PR as soon as possible. The repository is
+https://github.com/idanarye/vim-makecfg
+
+USAGE                                                           *makecfg-usage*
+
+* ":MCF <cfgname>" to set 'makeprg' and 'errorformat' to those defined by
+  the selected tool: >
+
+    :MCF ant
+    " Will run "ant":
+    :make
+<
+* ":MCF <cfgname> <command>" to set 'makeprg' and 'errorformat', run the
+  command, and then set them back.
+  " Will run "ant": >
+
+    :MCF ant make
+<
+* "makecfg#getOptions(<cfgname>)" to get the 'makeprg' and 'errorformat' in
+  a Vim dictionary to use in your own plugin.
+* (Omnipytent extension |omnipytent.ext|) a context manager for setting
+  'makeprg' and 'errorformat' in Omnipytent tasks: >
+
+    from omnipytent.ext.makecfg import makecfg
+
+    with makecfg('ant'):
+        # will run "ant":
+        CMD.make()
+<

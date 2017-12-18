@@ -16,7 +16,7 @@
     "makeprg": "rdmd"
   },
   "mvn": {
-    "errorformat": "%A%f:%l:%m,%-Z%p^,%-C%.%#",
+    "errorformat": "[ERROR] %f:[%l\\,%v] %m",
     "makeprg": "mvn"
   },
   "ldc": {

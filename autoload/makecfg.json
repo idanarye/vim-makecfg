@@ -54,5 +54,9 @@
   "javac": {
     "errorformat": "%A%f:%l:%m,%-Z%p^,%-C%.%#",
     "makeprg": "javac"
+  },
+  "pycodestyle": {
+    "errorformat": "%f:%l:%c: %m",
+    "makeprg": "pycodestyle"
   }
 }

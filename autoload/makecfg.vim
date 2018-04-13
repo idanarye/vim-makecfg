@@ -6,8 +6,8 @@ function! makecfg#load() abort
     let l:timestamp = getftime(s:jsonPath)
     if l:timestamp != s:loadedCfgsTimestamp
         let s:cfgs = json_decode(join(readfile(s:jsonPath)))
+        let s:loadedCfgsTimestamp = l:timestamp
     endif
-    let s:loadedCfgsTimestamp = l:timestamp
     return s:cfgs
 endfunction
 
@@ -37,12 +37,7 @@ function! makecfg#useOptions(cfgName, scope) abort
 endfunction
 
 function! makecfg#withOptions(cfgName, command) abort
-    try
-        let l:options = makecfg#load()[a:cfgName]
-    catch /E716/
-        throw 'MakeCFG has no configuration named ' . a:cfgName
-    endtry
-
+    let l:options = makecfg#getOptions(a:cfgName)
     let l:lMakeprg = &l:makeprg
     let l:lErrorformat = &l:errorformat
     let l:gMakeprg = &g:makeprg
@@ -88,4 +83,3 @@ function! makecfg#vimCommandCompletion(argLead, cmdLine, cursorPos) abort
         return getcompletion(l:command, 'cmdline')
     endif
 endfunction
-
